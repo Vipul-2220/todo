@@ -25,11 +25,11 @@ class _AddTaskState extends State<AddTask> {
           .collection('task')
           .doc()
           .collection('mytasks')
-          .doc(time.toString())
-          .set(
+          .add(
         {
           'title': titleController.text,
           'description': descriptionController.text,
+          'time': time.toString(),
         },
       );
     } catch (e) {
