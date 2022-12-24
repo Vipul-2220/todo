@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo/utils/constants.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({super.key});
@@ -23,13 +24,13 @@ class _AddTaskState extends State<AddTask> {
     try {
       await FirebaseFirestore.instance
           .collection('task')
-          .doc()
+          .doc(Constants.dummyUserId)
           .collection('mytasks')
           .add(
         {
           'title': titleController.text,
           'description': descriptionController.text,
-          'time': time.toString(),
+          'timestamp': time.millisecondsSinceEpoch,
         },
       );
     } catch (e) {
