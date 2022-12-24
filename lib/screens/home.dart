@@ -42,9 +42,13 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          color: Colors.grey[400],
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.all(15.9),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
                 height: 50,
@@ -54,66 +58,94 @@ class _HomeState extends State<Home> {
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+              SizedBox(
+                height: 70,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)),
-                      width: 300,
-                      child: TextField(
-                        controller: taskController,
-                        // maxLines: maxLines,
-                        decoration: const InputDecoration(
-                            labelText: 'Type Something here...',
-                            border: OutlineInputBorder()),
+                    Expanded(
+                      child: Card(
+                        elevation: 6.0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        // width: 300,
+                        child: TextField(
+                          controller: taskController,
+                          // maxLines: maxLines,
+
+                          decoration: InputDecoration(
+                            hintText: 'Type Something here....',
+                            // labelText: 'Type Something here...',
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide:
+                                    BorderSide(width: 2, color: Colors.black)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide:
+                                    BorderSide(width: 2, color: Colors.black)),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide(width: 5)),
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(
-                      width: 10,
+                      width: 20,
                     ),
                     Container(
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.black),
-                      child: IconButton(
-                        onPressed: () {
-                          addTaskToFirebase();
-                        },
-                        icon: const Icon(
-                          Icons.add,
-                          size: 30,
-                          color: Colors.white,
-                        ),
+                      width: 50,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black,
+                              ),
+                              alignment: Alignment.center,
+                              child: IconButton(
+                                onPressed: () {
+                                  addTaskToFirebase();
+                                },
+                                icon: const Icon(
+                                  Icons.add,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(2.0),
+                            child: Divider(
+                              thickness: 2.0,
+                              height: 5,
+                              color: Colors.grey[800],
+                              endIndent: 2,
+                              indent: 2,
+                            ),
+                          )
+                        ],
                       ),
                     )
                   ],
                 ),
               ),
-              Container(
-                height: 200,
-                child: ReadTask(),
+              const SizedBox(
+                height: 50,
+              ),
+              Expanded(
+                child: Container(
+                  child: ReadTask(),
+                ),
               ),
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddTask(),
-            ),
-          );
-        },
       ),
     );
   }

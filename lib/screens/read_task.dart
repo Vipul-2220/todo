@@ -41,15 +41,44 @@ class _ReadTaskState extends State<ReadTask> {
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
               // document.reference.collection('mytasks').get();
-              return ListTile(
-                title: Text(
-                  data['title'],
-                  style: TextStyle(color: Colors.black),
+              return Card(
+                elevation: 4.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14.0)),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: IconButton(
+                            onPressed: () {}, icon: Icon(Icons.done))),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        'Text : ${data['title']}',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.edit),
+                            ),
+                          ),
+                          Expanded(
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.delete),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+
+                  // subtitle: Text(data['company']),
                 ),
-                subtitle: Text('${data['description']}'),
-                trailing: Text(
-                    'Time :${DateTime.fromMillisecondsSinceEpoch(data['timestamp'])}'),
-                // subtitle: Text(data['company']),
               );
             }).toList(),
           ),
